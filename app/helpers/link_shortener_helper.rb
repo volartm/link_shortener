@@ -1,0 +1,2 @@
+module LinkShortenerHelper
+end
