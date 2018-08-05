@@ -1,2 +1,12 @@
-<h1>LinkShortener#shorten</h1>
-<p>Find me in app/views/link_shortener/shorten.html.erb</p>
+<!DOCTYPE html>
+<html>
+<body>
+
+<%= form_tag({controller: "link_shortener", action: "shorten"}, method: "get") do %>
+  <%= label_tag(:q, "Link:") %>
+  <%= text_field_tag(:link) %>
+  <%= submit_tag("shorten") %>
+<% end %>
+
+</body>
+</html>
