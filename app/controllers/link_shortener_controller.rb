@@ -18,9 +18,11 @@ class LinkShortenerController < ApplicationController
   end
 
   def new data
-    m = Link.new
-    m.link = data
-    m.link_hash = Base64.urlsafe_encode64(data)[0...6]
-    m.save
+    db_raw = Link.new
+    db_raw.link = data
+    db_raw.link_hash = Base64.urlsafe_encode64(data)[0...6]
+    db_raw.save
+
+    redirect_to controller: 'link_show', action: 'show', link_hash: db_raw.link_hash
   end
 end
