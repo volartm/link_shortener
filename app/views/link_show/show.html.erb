@@ -2,11 +2,6 @@
 <html>
 <body>
 
-<%#= form_tag({controller: "link_shortener", action: "shorten"}, method: "get") do %>
-  <%#= label_tag(:text_sh, "Short link:") %>
-  <%#= label_tag(:q, "Short link:") %>
-<%# end %>
-
 <%= form_tag do %>
 
   <%= link_to(@short_link_text, @short_link) %>

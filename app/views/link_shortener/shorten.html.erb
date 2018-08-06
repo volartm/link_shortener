@@ -3,10 +3,23 @@
 <body>
 
 <%= form_tag({controller: "link_shortener", action: "shorten"}, method: "get") do %>
-  <%= label_tag(:q, "Link:") %>
+  <%= label_tag(:q, "URL:") %>
   <%= text_field_tag(:link) %>
-  <%= submit_tag("shorten") %>
+  <%= submit_tag("Shorten URL", :id => "submit") %>
 <% end %>
+
+<script type="application/javascript">
+  var sub = document.getElementById('submit');
+  var input = document.getElementById('link');
+  var regex     = new RegExp("https?:\\/\\/[\\S]+");
+
+  sub.onclick=function(e){
+      if(!regex.test(input.value)) {
+          e.preventDefault();
+          alert("You must specify a URL. The URL must start with http://, https://");
+      }
+  };
+</script>
 
 </body>
 </html>
