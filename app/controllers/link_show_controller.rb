@@ -6,7 +6,7 @@ class LinkShowController < ApplicationController
     @short_link = @base_uri + '/' + params['link_hash'].to_s
   end
 
-  def ll
+  def show_original
 
     sql = "SELECT\nlink\nFROM\npublic.links\nWHERE\nlinks.link_hash ="
     sql += "'" + params['link_hash'] + "'" + ';'
