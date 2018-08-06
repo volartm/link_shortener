@@ -24,7 +24,10 @@ default: &default
 
 development:
   <<: *default
-  database: link_shortener_dev
+  host: localhost
+  user: vktssufhqbiput
+  database: d39u0kbb5du3s9
+  password: cea8b54d6adfc5fa06dd78f8edd0811807987ff55cf47e3f1bdc5ba38b3274b3
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
