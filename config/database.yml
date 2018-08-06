@@ -81,5 +81,7 @@ test:
 #
 production:
   <<: *default
+  user: vktssufhqbiput
   database: link_shortener
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  password: cea8b54d6adfc5fa06dd78f8edd0811807987ff55cf47e3f1bdc5ba38b3274b3
+#  <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
