@@ -10,16 +10,13 @@ class LinkShortenerController < ApplicationController
     end
 
     unless link.nil?
-      sql = "SELECT\nlink,\nlink_hash\nFROM\npublic.links\nWHERE\nlinks.link ="
-      sql += "'" + link + "'" + "\n"
-      sql += "ORDER BY\nlinks.link\nASC\nLIMIT 1;"
 
-      records_array = ActiveRecord::Base.connection.exec_query(sql)
+      db_row = Link.find_by(link: link)
 
-      if records_array.empty?
+      if db_row.nil?
         new(link)
       else
-        redirect_to controller: 'link_show', action: 'show', link_hash: records_array[0]['link_hash']
+        redirect_to controller: 'link_show', action: 'show', link_hash: db_row['link_hash']
       end
 
     end
@@ -28,17 +25,17 @@ class LinkShortenerController < ApplicationController
   def new data
     host_uri = "#{request.host}".to_s
 
-    db_raw = Link.new
-    db_raw.link = data
+    db_row = Link.new
+    db_row.link = data
     if data.include?(host_uri)
-      db_raw.link_hash = data.sub!("#{request.protocol}#{request.host}:#{request.port}/", "")
+      db_row.link_hash = data.sub!("#{request.protocol}#{request.host}:#{request.port}/", "")
     else
-      db_raw.link_hash = Base64.urlsafe_encode64(random_salt + data)[0...8]
+      db_row.link_hash = Base64.urlsafe_encode64(random_salt + data)[0...8]
     end
 
-    db_raw.save
+    db_row.save
 
-    redirect_to controller: 'link_show', action: 'show', link_hash: db_raw.link_hash
+    redirect_to controller: 'link_show', action: 'show', link_hash: db_row.link_hash
   end
 
   def random_salt

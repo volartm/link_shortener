@@ -7,12 +7,7 @@ class LinkShowController < ApplicationController
   end
 
   def show_original
-
-    sql = "SELECT\nlink\nFROM\npublic.links\nWHERE\nlinks.link_hash ="
-    sql += "'" + params['link_hash'] + "'" + ';'
-
-    records_array = ActiveRecord::Base.connection.exec_query(sql)
-    link = records_array[0]['link']
+    link = Link.find_by(link_hash: params['link_hash']).link
 
     redirect_to(link, status: 301)
 
